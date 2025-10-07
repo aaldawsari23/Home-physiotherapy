@@ -1,0 +1,41 @@
+diff -urN ./components/PrintablePatientCard.tsx /home/oai/share/mhhc5/components/PrintablePatientCard.tsx
+--- ./components/PrintablePatientCard.tsx	2025-10-02 01:57:12.000000000 +0000
++++ /home/oai/share/mhhc5/components/PrintablePatientCard.tsx	2025-10-07 05:10:42.103345621 +0000
+@@ -17,10 +17,10 @@
+   // Get current user based on role
+   const getCurrentUser = () => {
+     const roleMap = {
+-      'Doctor': 'طبيب',
+-      'Nurse': 'ممرض',
+-      'Physical Therapist': 'أخصائي علاج طبيعي',
+-      'Social Worker': 'أخصائي اجتماعي'
++      Doctor: 'طبيب',
++      Nurse: 'ممرض',
++      PhysicalTherapist: 'أخصائي علاج طبيعي',
++      SocialWorker: 'أخصائي اجتماعي'
+     };
+     return state.staff.find(s => s.المهنة === roleMap[state.currentRole]) || state.staff[0];
+   };
+diff -urN ./types.ts /home/oai/share/mhhc5/types.ts
+--- ./types.ts	2025-10-06 12:08:12.000000000 +0000
++++ /home/oai/share/mhhc5/types.ts	2025-10-07 05:10:30.267307866 +0000
+@@ -221,13 +221,12 @@
+     members: Staff[];
+ }
+ 
+-export enum Role {
+-    Doctor = 'Doctor',
+-    Nurse = 'Nurse',
+-    PhysicalTherapist = 'Physical Therapist',
+-    SocialWorker = 'Social Worker',
+-    Driver = 'Driver'
+-}
++// Import canonical Role enum from the new roles module. All uses of Role
++// throughout the application should import from '../types/roles' or this
++// re‑export. The original Role definition with spaces has been removed.
++import { Role } from './types/roles';
++
++export { Role };
+ 
+ export interface Visit {
+     patientId: string;
